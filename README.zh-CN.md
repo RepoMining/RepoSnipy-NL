@@ -7,7 +7,7 @@ RepoSnipy-NL 是 [RepoMining/RepoSnipy](https://github.com/RepoMining/RepoSnipy)
 Python 仓库向量中检索相关项目。
 
 Python 包当前已包含自然语言查询、通道投影、融合排序、缺失通道重归一化和
-FastAPI 服务。Vue 前端将在后续阶段接入。
+FastAPI 服务，并提供 Vue 3 检索界面。
 
 ## 计划范围
 

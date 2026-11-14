@@ -8,8 +8,8 @@ describe a software requirement in natural language and retrieve relevant
 Python repositories from precomputed RepoSim4Py embeddings.
 
 The project is being developed incrementally under the RepoMining organization.
-The Python package provides the core retrieval pipeline and a FastAPI service;
-frontend integration will follow in a later commit.
+The Python package provides the core retrieval pipeline, a FastAPI service, and
+a Vue 3 web interface.
 
 ## Scope
 
@@ -33,7 +33,7 @@ RepoSnipy-NL/
 └── README.md
 ```
 
-The frontend and evaluation directories will be added in later stages.
+The evaluation directory will be added in a later stage.
 
 ## Python library
 
@@ -73,8 +73,8 @@ README or docstring does not exclude an otherwise valid candidate.
 
 ## Project status
 
-Core retrieval logic is available as a Python library, and the FastAPI service
-is ready for direct use. Frontend integration is not yet present.
+Core retrieval logic is available as a Python library. The FastAPI service and
+Vue 3 web interface are ready for direct use.
 
 ## Running the API
 
@@ -103,6 +103,26 @@ Start the service:
 
 The API listens on `http://127.0.0.1:8000` by default. OpenAPI documentation is
 available at `/docs`.
+
+For the frontend development server, run:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The Vite server runs at `http://localhost:5173` and proxies API requests to the
+FastAPI service. For a production-style local run:
+
+```bash
+cd frontend
+npm run build
+cd ..
+.venv/bin/python -m reposnipy_nl
+```
+
+FastAPI then serves the compiled interface at `/`.
 
 Available endpoints:
 
