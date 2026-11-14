@@ -46,6 +46,16 @@ python evaluation/audit_benchmark.py
 
 Demo 使用合成向量展示投影、融合和排序流程，仅用于说明调用方式，不作为实验数据。
 
+## 发布与在线部署
+
+`v1.0.0` 的 Python 分发包和 226 MB 向量索引通过 GitHub Releases 发布，索引不提交
+到普通源码目录。索引来源、提交、大小、SHA-256 和仓库数量固定在
+[release/index_manifest.json](release/index_manifest.json)。
+
+Hugging Face Space 部署流程见 [docs/deployment.md](docs/deployment.md)。部署需要
+组织维护者配置 `HF_TOKEN` 并手动运行工作流；只有工作流成功且公开地址实测可用后，
+才能标记为在线 Demo。
+
 ## 来源与署名
 
 原始 WebPro 原型及开发记录位于

@@ -56,6 +56,36 @@ If the local model directory is absent, the service attempts to load
 `Henry65/RepoSim4Py` through Transformers and therefore needs model access.
 Model weights, indexes, caches, and secrets must remain outside Git.
 
+### Download the pinned v1.0.0 index
+
+After the `v1.0.0` release is published:
+
+```bash
+mkdir -p data
+curl --fail --location \
+  https://github.com/RepoMining/RepoSnipy-NL/releases/download/v1.0.0/index.bin \
+  --output data/index.bin
+```
+
+Verify the index before use:
+
+```bash
+python scripts/verify_index.py --download --output data/index.bin
+```
+
+The expected SHA-256 is:
+
+```text
+3837b4cb3f10cd0ff035201ef44ab655608b2877e5c89efc5cc63a69b666c415
+```
+
+The published index uses the product dataset layout. Set:
+
+```bash
+export REPOSNIPY_DATASET=product
+export REPOSNIPY_INDEX_PATH="$PWD/data/index.bin"
+```
+
 The following environment variables are supported:
 
 | Variable | Purpose |
@@ -134,6 +164,10 @@ python -m reposnipy_nl
 
 Then open `http://127.0.0.1:8000/` for the web interface or
 `http://127.0.0.1:8000/docs` for the API documentation.
+
+For public hosting, see [deployment.md](deployment.md). A Hugging Face Space
+deployment requires the `HF_TOKEN` repository secret and an explicit manual
+workflow run.
 
 ## Troubleshooting
 

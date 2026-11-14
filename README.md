@@ -1,5 +1,7 @@
 # RepoSnipy-NL
 
+[![GitHub release](https://img.shields.io/github/v/release/RepoMining/RepoSnipy-NL)](https://github.com/RepoMining/RepoSnipy-NL/releases)
+
 **Natural-language repository retrieval for the RepoSnipy ecosystem.**
 
 RepoSnipy-NL is an experimental extension of
@@ -31,6 +33,8 @@ RepoSnipy-NL/
 ├── frontend/             Vue 3 web interface
 ├── evaluation/           Frozen benchmark and audit script
 ├── docs/                 Installation and deployment documentation
+├── release/              Index manifest and release-asset notes
+├── deploy/               Hugging Face Space deployment bundle
 └── README.md
 ```
 
@@ -110,6 +114,17 @@ and the full 101-point benchmark audit.
 
 See [docs/installation.md](docs/installation.md) for prerequisites and complete
 local setup, and [docs/usage.md](docs/usage.md) for library and HTTP examples.
+
+## Release assets
+
+`v1.0.0` publishes the Python distributions and the pinned 226 MB RepoSim4Py
+index through GitHub Releases. The index is not committed to source control.
+Its upstream commit, size, SHA-256, and validated repository counts are pinned
+in [release/index_manifest.json](release/index_manifest.json).
+
+The Hugging Face Space deployment is prepared in
+[docs/deployment.md](docs/deployment.md). It is not considered live until the
+deployment workflow completes and the resulting public URL is verified.
 
 ## Running the API
 

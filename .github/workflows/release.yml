@@ -1,0 +1,52 @@
+name: Publish release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Build Python distributions
+        run: |
+          python -m pip install --upgrade build
+          python -m build
+
+      - name: Fetch and verify index
+        env:
+          INDEX_URL: https://media.githubusercontent.com/media/RepoMining/RepoSnipy/a8ea0df92e4143c008be2878f8ddae98ab8eb201/data/index.bin
+          INDEX_SHA256: 3837b4cb3f10cd0ff035201ef44ab655608b2877e5c89efc5cc63a69b666c415
+        run: |
+          curl --fail --location --retry 3 --output index.bin "$INDEX_URL"
+          echo "$INDEX_SHA256  index.bin" | sha256sum --check -
+          sha256sum index.bin > index.bin.sha256
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="docs/releases/${GITHUB_REF_NAME}.md"
+          if [[ -f "$notes" ]]; then
+            gh release create "$GITHUB_REF_NAME" \
+              dist/* index.bin index.bin.sha256 release/index_manifest.json \
+              --title "RepoSnipy-NL ${GITHUB_REF_NAME}" \
+              --notes-file "$notes"
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              dist/* index.bin index.bin.sha256 release/index_manifest.json \
+              --title "RepoSnipy-NL ${GITHUB_REF_NAME}" \
+              --generate-notes
+          fi

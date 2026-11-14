@@ -1,0 +1,32 @@
+{
+  "schema_version": "reposnipy-nl-index-manifest.v1",
+  "release": "v1.0.0",
+  "asset": {
+    "name": "index.bin",
+    "size_bytes": 226172318,
+    "sha256": "3837b4cb3f10cd0ff035201ef44ab655608b2877e5c89efc5cc63a69b666c415"
+  },
+  "source": {
+    "repository": "RepoMining/RepoSnipy",
+    "commit": "a8ea0df92e4143c008be2878f8ddae98ab8eb201",
+    "path": "data/index.bin",
+    "storage": "Git LFS"
+  },
+  "validated_dataset": {
+    "dataset_mode": "product",
+    "unique_repositories": 9678,
+    "raw_records": 9679,
+    "channels": {
+      "code": 9650,
+      "doc": 8808,
+      "readme": 9464,
+      "requirement": 5451
+    }
+  },
+  "service_usage": {
+    "recommended_path": "data/index.bin",
+    "required_environment": {
+      "REPOSNIPY_DATASET": "product"
+    }
+  }
+}

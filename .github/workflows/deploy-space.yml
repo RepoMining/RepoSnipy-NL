@@ -1,0 +1,50 @@
+name: Deploy Hugging Face Space
+
+on:
+  workflow_dispatch:
+    inputs:
+      space_id:
+        description: Hugging Face Space id in owner/name form
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Hugging Face client
+        run: python -m pip install "huggingface_hub[cli]>=0.26,<1"
+
+      - name: Assemble Space bundle
+        run: |
+          mkdir -p space
+          cp -R src frontend space/
+          cp pyproject.toml README.md LICENSE NOTICE space/
+          cp deploy/huggingface-space/Dockerfile space/Dockerfile
+          cp deploy/huggingface-space/README.md space/README.md
+
+      - name: Create and upload Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          SPACE_ID: ${{ inputs.space_id }}
+        run: |
+          if [[ -z "$HF_TOKEN" ]]; then
+            echo "HF_TOKEN secret is not configured" >&2
+            exit 1
+          fi
+          huggingface-cli repo create "$SPACE_ID" \
+            --repo-type space --space_sdk docker --exist-ok
+          huggingface-cli upload "$SPACE_ID" space . \
+            --repo-type space \
+            --commit-message "Deploy RepoSnipy-NL v1.0.0"

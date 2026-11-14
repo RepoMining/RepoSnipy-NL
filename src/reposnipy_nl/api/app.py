@@ -83,7 +83,7 @@ def create_app(repository_service: RepositoryService | None = None) -> FastAPI:
             "Natural-language and repository-to-repository retrieval over "
             "precomputed RepoSim4Py embeddings."
         ),
-        version="0.3.0",
+        version="1.0.0",
         lifespan=lifespan,
     )
     application.add_middleware(
