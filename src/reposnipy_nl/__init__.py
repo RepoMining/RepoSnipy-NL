@@ -1,3 +1,27 @@
 """RepoSnipy-NL natural-language repository retrieval package."""
 
-__version__ = "0.1.0"
+from reposnipy_nl.retrieval import (
+    DEFAULT_REQUIREMENT_WEIGHTS,
+    ChannelSpace,
+    RequirementRetriever,
+    RequirementSearchHit,
+    RequirementSearchResult,
+    fuse_requirement_scores,
+    normalize_requirement,
+    preprocess_channel,
+    transform_query_vector,
+)
+
+__version__ = "0.2.0"
+
+__all__ = [
+    "DEFAULT_REQUIREMENT_WEIGHTS",
+    "ChannelSpace",
+    "RequirementRetriever",
+    "RequirementSearchHit",
+    "RequirementSearchResult",
+    "fuse_requirement_scores",
+    "normalize_requirement",
+    "preprocess_channel",
+    "transform_query_vector",
+]

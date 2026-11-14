@@ -6,8 +6,8 @@ RepoSnipy-NL 是 [RepoMining/RepoSnipy](https://github.com/RepoMining/RepoSnipy)
 的实验性扩展。用户可以输入自然语言功能需求，在已预计算的 RepoSim4Py
 Python 仓库向量中检索相关项目。
 
-本项目当前处于初始化阶段，只包含英文项目说明、中文说明、许可证和 Python
-包目录。检索功能将在后续阶段逐步迁移。
+Python 包当前已包含自然语言查询、通道投影、融合排序和缺失通道重归一化逻辑。
+FastAPI 服务和前端将在后续阶段接入。
 
 ## 计划范围
 

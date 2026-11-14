@@ -8,9 +8,8 @@ describe a software requirement in natural language and retrieve relevant
 Python repositories from precomputed RepoSim4Py embeddings.
 
 The project is being developed incrementally under the RepoMining organization.
-The initial repository stage contains project documentation, licensing, and the
-English Python package structure only. Retrieval functionality will be migrated
-in subsequent commits.
+The Python package now provides the core natural-language retrieval pipeline;
+web service and frontend integration will follow in later commits.
 
 ## Scope
 
@@ -34,12 +33,48 @@ RepoSnipy-NL/
 └── README.md
 ```
 
-Directories that contain implementation code will be added in later stages.
+The remaining directories will be added in later stages.
+
+## Python library
+
+```python
+from reposnipy_nl import ChannelSpace, RequirementRetriever
+
+spaces = {
+    "readme": ChannelSpace(
+        matrix=readme_matrix,
+        mask=readme_available,
+        mean=readme_mean,
+        projection=readme_projection,
+    ),
+    "doc": ChannelSpace(
+        matrix=doc_matrix,
+        mask=doc_available,
+        mean=doc_mean,
+        projection=doc_projection,
+    ),
+}
+
+retriever = RequirementRetriever(
+    repository_names=repository_names,
+    channel_spaces=spaces,
+    encoder=reposim4py_pipeline,
+)
+response = retriever.search(
+    "Extract tables from PDF files and export them as CSV",
+    mode="blend",
+    limit=10,
+)
+```
+
+The default `blend` weights are README `0.33` and docstring `0.67`, selected on
+validation data. Missing channels are renormalized per repository so a missing
+README or docstring does not exclude an otherwise valid candidate.
 
 ## Project status
 
-Initial project structure and documentation. The repository is not yet a
-runnable application.
+Core retrieval logic is available as a Python library. FastAPI and frontend
+integration are not yet present.
 
 ## Relationship to RepoSnipy
 
