@@ -1,0 +1,20 @@
+RepoSnipy-NL
+============
+
+RepoSnipy-NL is an experimental natural-language retrieval extension for the
+RepoSnipy ecosystem.
+
+Upstream projects and resources:
+
+- RepoMining/RepoSnipy: MIT License
+  https://github.com/RepoMining/RepoSnipy
+- RepoMining/RepoSim4Py: MIT License
+  https://github.com/RepoMining/RepoSim4Py
+- Microsoft UniXCoder: MIT License
+  https://github.com/microsoft/CodeBERT
+
+The original WebPro prototype was developed by @dyb158507:
+https://github.com/dyb158507/RepoSnipy-WebPro
+
+Third-party model weights and datasets are not relicensed by this project.
+Their original licenses and usage terms continue to apply.
