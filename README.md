@@ -8,8 +8,8 @@ describe a software requirement in natural language and retrieve relevant
 Python repositories from precomputed RepoSim4Py embeddings.
 
 The project is being developed incrementally under the RepoMining organization.
-The Python package now provides the core natural-language retrieval pipeline;
-web service and frontend integration will follow in later commits.
+The Python package provides the core retrieval pipeline and a FastAPI service;
+frontend integration will follow in a later commit.
 
 ## Scope
 
@@ -26,14 +26,14 @@ web service and frontend integration will follow in later commits.
 RepoSnipy-NL/
 ├── src/reposnipy_nl/     Python package
 ├── tests/                Automated tests
-├── backend/              FastAPI service
+├── src/reposnipy_nl/api/ FastAPI service
 ├── frontend/             Vue 3 web interface
 ├── evaluation/           Reproducible retrieval evaluation
 ├── docs/                 Installation and deployment documentation
 └── README.md
 ```
 
-The remaining directories will be added in later stages.
+The frontend and evaluation directories will be added in later stages.
 
 ## Python library
 
@@ -73,8 +73,45 @@ README or docstring does not exclude an otherwise valid candidate.
 
 ## Project status
 
-Core retrieval logic is available as a Python library. FastAPI and frontend
-integration are not yet present.
+Core retrieval logic is available as a Python library, and the FastAPI service
+is ready for direct use. Frontend integration is not yet present.
+
+## Running the API
+
+Install the API dependencies from a source checkout:
+
+```bash
+python -m venv .venv
+.venv/bin/pip install -e ".[api]"
+```
+
+Prepare the index and model outside Git:
+
+```text
+data/index_developing.bin
+models/RepoSim4Py/
+```
+
+The backend uses `.cache/huggingface` inside the project by default for model
+metadata. Set `REPOSNIPY_CACHE_DIR` to use another writable cache location.
+
+Start the service:
+
+```bash
+.venv/bin/python -m reposnipy_nl
+```
+
+The API listens on `http://127.0.0.1:8000` by default. OpenAPI documentation is
+available at `/docs`.
+
+Available endpoints:
+
+- `GET /api/health`
+- `GET /api/meta`
+- `GET /api/repo`
+- `GET /api/search`
+- `POST /api/search/requirement`
+- `POST /api/index`
 
 ## Relationship to RepoSnipy
 
