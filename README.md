@@ -20,12 +20,13 @@ Vue 3 web interface, and a reproducible retrieval benchmark.
 - Renormalize only over channels available for each candidate.
 - Preserve the existing repository-to-repository search workflow.
 
-## Planned structure
+## Repository structure
 
 ```text
 RepoSnipy-NL/
 ├── src/reposnipy_nl/     Python package
 ├── tests/                Automated tests
+├── examples/             Offline synthetic demo
 ├── src/reposnipy_nl/api/ FastAPI service
 ├── frontend/             Vue 3 web interface
 ├── evaluation/           Frozen benchmark and audit script
@@ -33,7 +34,8 @@ RepoSnipy-NL/
 └── README.md
 ```
 
-The documentation directory will be added in a later stage.
+Installation, usage, Demo, and evaluation instructions are indexed in
+[docs/README.md](docs/README.md).
 
 ## Python library
 
@@ -90,7 +92,24 @@ metrics, and limitations.
 ## Project status
 
 Core retrieval logic is available as a Python library. The FastAPI service,
-Vue 3 web interface, and reproducible benchmark are ready for direct use.
+Vue 3 web interface, offline Demo, automated tests, and reproducible benchmark
+are ready for direct use.
+
+## Verification
+
+Run the model-free tests and Demo:
+
+```bash
+python examples/retrieval_demo.py
+python -m unittest discover -s tests -v
+```
+
+The tests cover channel preprocessing and fusion behavior, missing-channel
+renormalization, service configuration, package metadata, the synthetic Demo,
+and the full 101-point benchmark audit.
+
+See [docs/installation.md](docs/installation.md) for prerequisites and complete
+local setup, and [docs/usage.md](docs/usage.md) for library and HTTP examples.
 
 ## Running the API
 

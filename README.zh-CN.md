@@ -31,6 +31,21 @@ python evaluation/audit_benchmark.py
 全索引召回率。协议、指标与限制见
 [evaluation/README.md](evaluation/README.md)。
 
+## 安装、测试与 Demo
+
+完整安装说明见 [docs/installation.md](docs/installation.md)，库和 HTTP 接口用法见
+[docs/usage.md](docs/usage.md)。
+
+以下命令不需要模型或仓库索引即可运行：
+
+```bash
+python examples/retrieval_demo.py
+python -m unittest discover -s tests -v
+python evaluation/audit_benchmark.py
+```
+
+Demo 使用合成向量展示投影、融合和排序流程，仅用于说明调用方式，不作为实验数据。
+
 ## 来源与署名
 
 原始 WebPro 原型及开发记录位于

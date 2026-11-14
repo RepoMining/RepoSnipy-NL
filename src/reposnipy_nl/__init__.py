@@ -12,7 +12,7 @@ from reposnipy_nl.retrieval import (
     transform_query_vector,
 )
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 __all__ = [
     "DEFAULT_REQUIREMENT_WEIGHTS",
