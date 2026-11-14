@@ -8,8 +8,8 @@ describe a software requirement in natural language and retrieve relevant
 Python repositories from precomputed RepoSim4Py embeddings.
 
 The project is being developed incrementally under the RepoMining organization.
-The Python package provides the core retrieval pipeline, a FastAPI service, and
-a Vue 3 web interface.
+The Python package provides the core retrieval pipeline, a FastAPI service, a
+Vue 3 web interface, and a reproducible retrieval benchmark.
 
 ## Scope
 
@@ -28,12 +28,12 @@ RepoSnipy-NL/
 ├── tests/                Automated tests
 ├── src/reposnipy_nl/api/ FastAPI service
 ├── frontend/             Vue 3 web interface
-├── evaluation/           Reproducible retrieval evaluation
+├── evaluation/           Frozen benchmark and audit script
 ├── docs/                 Installation and deployment documentation
 └── README.md
 ```
 
-The evaluation directory will be added in a later stage.
+The documentation directory will be added in a later stage.
 
 ## Python library
 
@@ -71,10 +71,26 @@ The default `blend` weights are README `0.33` and docstring `0.67`, selected on
 validation data. Missing channels are renormalized per repository so a missing
 README or docstring does not exclude an otherwise valid candidate.
 
+## Evaluation
+
+The repository includes one frozen benchmark with 40 functional intents, 80
+Chinese and English queries, and 2,706 query-repository judgments. Run the
+independent data-integrity and metric audit with:
+
+```bash
+python evaluation/audit_benchmark.py
+```
+
+The script verifies the benchmark checksum, reconstructs all 101 fusion-weight
+points, and checks the production README/docstring ratio. Its results apply to
+closed-pool reranking over the benchmark candidate union, not full-index
+recall. See [evaluation/README.md](evaluation/README.md) for the protocol,
+metrics, and limitations.
+
 ## Project status
 
-Core retrieval logic is available as a Python library. The FastAPI service and
-Vue 3 web interface are ready for direct use.
+Core retrieval logic is available as a Python library. The FastAPI service,
+Vue 3 web interface, and reproducible benchmark are ready for direct use.
 
 ## Running the API
 

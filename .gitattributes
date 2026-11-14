@@ -9,3 +9,4 @@
 *.npz binary
 *.npy binary
 *.bin binary
+evaluation/benchmark/*.json binary
